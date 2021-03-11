@@ -6,12 +6,12 @@ import Employee from "./Employee";
 const isValidNumber = (value) => {
    return isFinite(value) && Number(value)
 }
-const EmployeeList = ({ employees = [] }) => {
+const EmployeeList = () => {
    const [employeesList, setEmployeesList] = useState([]);
    const [employeeId, setEmployeeId] = useState('');
 
    const getEmployeeById = () => {
-      axios.get('http://localhost:8080/employee/'+employeeId)
+      axios.get('http://localhost:8080/employee/' + employeeId)
          .then(result => {
             setEmployeesList([result.data]);
          })
@@ -24,11 +24,11 @@ const EmployeeList = ({ employees = [] }) => {
    };
    const handleEmployeesSearch = () => {
       console.log("employeeId: " + employeeId);
-      if(isValidNumber(employeeId)){
+      if (isValidNumber(employeeId)) {
          getEmployeeById()
-      } else if(employeeId === ''){
+      } else if (employeeId === '') {
          getEmployees()
-      }else {
+      } else {
          cleanEmployeeInfo();
       }
    }
@@ -63,16 +63,13 @@ const EmployeeList = ({ employees = [] }) => {
                </thead>
                <tbody>
                {employeesList.map((employee) => (
-                  <Employee
-                     employee={employee}
-                  />
+                  <Employee employee={employee}/>
                ))}
                </tbody>
             </table>
          </div>
       </div>
    )
-
 };
 
 export default EmployeeList;
