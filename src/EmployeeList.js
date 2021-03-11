@@ -6,28 +6,26 @@ import Employee from "./Employee";
 const isValidNumber = (value) => {
    return isFinite(value) && Number(value)
 }
+
+const getEmployeeById = (employeeId) => {
+   return axios.get('http://localhost:8080/employee/' + employeeId)
+      .then(result => [result.data])
+};
+
+const getEmployees = () => {
+   return axios.get('http://localhost:8080/employee')
+      .then(result => result.data)
+};
+
 const EmployeeList = () => {
    const [employeesList, setEmployeesList] = useState([]);
    const [employeeId, setEmployeeId] = useState('');
 
-   const getEmployeeById = () => {
-      axios.get('http://localhost:8080/employee/' + employeeId)
-         .then(result => {
-            setEmployeesList([result.data]);
-         })
-   };
-   const getEmployees = () => {
-      axios.get('http://localhost:8080/employee')
-         .then(result => {
-            setEmployeesList(result.data);
-         })
-   };
    const handleEmployeesSearch = () => {
-      console.log("employeeId: " + employeeId);
       if (isValidNumber(employeeId)) {
-         getEmployeeById()
+         getEmployeeById(employeeId).then( emplList =>setEmployeesList(emplList));
       } else if (employeeId === '') {
-         getEmployees()
+         getEmployees().then(emplList =>setEmployeesList(emplList));
       } else {
          cleanEmployeeInfo();
       }
