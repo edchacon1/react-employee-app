@@ -8,7 +8,7 @@ const isValidNumber = (value) => {
 
 const getEmployeeById = (employeeId) => {
    return fetch('http://localhost:8080/employee/' + employeeId)
-      .then(result => result.json()).catch(function(error) {
+      .then(result => result.json()).catch(function() {
          return undefined;
       });
 };
