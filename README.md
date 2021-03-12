@@ -4,7 +4,7 @@
 
 ### Install Node
 Runs the app in the development mode.\
-Go to [https://nodejs.org/es/download/](https://nodejs.org/es/download/) and install the correct version.
+Go to [https://nodejs.org/es/download/](https://nodejs.org/es/download/) and install the v14.16.0 version.
 
 ### Build App
 
