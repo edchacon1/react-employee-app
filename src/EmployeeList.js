@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Employee from "./Employee";
 
@@ -8,13 +7,15 @@ const isValidNumber = (value) => {
 }
 
 const getEmployeeById = (employeeId) => {
-   return axios.get('http://localhost:8080/employee/' + employeeId)
-      .then(result => [result.data])
+   return fetch('http://localhost:8080/employee/' + employeeId)
+      .then(result => result.json()).catch(function(error) {
+         return undefined;
+      });
 };
 
 const getEmployees = () => {
-   return axios.get('http://localhost:8080/employee')
-      .then(result => result.data)
+   return fetch('http://localhost:8080/employee/')
+      .then(result => result.json());
 };
 
 const EmployeeList = () => {
@@ -23,7 +24,8 @@ const EmployeeList = () => {
 
    const handleEmployeesSearch = () => {
       if (isValidNumber(employeeId)) {
-         getEmployeeById(employeeId).then( emplList =>setEmployeesList(emplList));
+         getEmployeeById(employeeId).then( empl => setEmployeesList([empl]));
+
       } else if (employeeId === '') {
          getEmployees().then(emplList =>setEmployeesList(emplList));
       } else {
