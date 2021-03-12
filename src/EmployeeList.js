@@ -39,14 +39,14 @@ const EmployeeList = () => {
    return (
       <div>
          <div className="form-group mt-3 ml-3">
-            <div><label>Employee Id <input name="employeeId" class="form-control mt-3" type="text" value={employeeId}
+            <div><label>Employee Id <input name="employeeId" className="form-control mt-3" type="text" value={employeeId}
                                            onChange={(event) => {
                                               setEmployeeId(event.target.value)
                                            }}/></label></div>
-            <div><input class="btn btn-success mt-2 mb-3" type="button" value="Get Employees"
+            <div><input className="btn btn-success mt-2 mb-3" type="button" value="Get Employees"
                         onClick={handleEmployeesSearch}></input></div>
          </div>
-         <div class="ml-3">
+         <div className="ml-3">
             <table className="table">
                <thead>
                <tr>
@@ -63,7 +63,7 @@ const EmployeeList = () => {
                </thead>
                <tbody>
                {employeesList.map((employee) => (
-                  <Employee employee={employee}/>
+                  <Employee key={employee!= undefined && employee.id} employee={employee}/>
                ))}
                </tbody>
             </table>
